@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C.R.E.E. - Centro Regional de Educación Gral. Patricio Escobar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            creeGreen: {
+              DEFAULT: '#0D6E38',
+              dark: '#084B25',
+              light: '#E8F5E9'
+            },
+            creeRed: {
+              DEFAULT: '#D32F2F',
+              dark: '#B71C1C',
+              light: '#FFEBEE'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen selection:bg-creeGreen selection:text-white">
+
+  <!-- TOP BANNER INFORMATIVO -->
+  <div class="bg-creeRed text-white py-1.5 px-4 text-xs sm:text-sm font-medium">
+    <div class="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-2">
+      <div class="flex items-center gap-2">
+        <span class="bg-white text-creeRed px-2 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider">Aviso</span>
+        <span>Período lectivo y matriculación digital activados.</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="tel:+59571200000" class="hover:underline flex items-center gap-1"><i class="fas font-xs fa-phone"></i> (071) 200-000</a>
+        <span class="hidden sm:inline">|</span>
+        <span class="hidden sm:inline"><i class="fas fa-map-marker-alt"></i> Encarnación, Paraguay</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVEGACIÓN PRINCIPAL -->
+  <header class="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <!-- LOGO Y ESCUDO -->
+        <a href="#inicio" class="flex items-center gap-3 group">
+          <div class="w-12 h-12 rounded-full bg-creeGreen text-white flex items-center justify-center font-black text-xl shadow-md border-2 border-creeRed group-hover:scale-105 transition-transform">
+            CREE
+          </div>
+          <div>
+            <span class="block font-black text-xl text-creeGreen tracking-tight leading-none">C.R.E.E.</span>
+            <span class="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Gral. Patricio Escobar</span>
+          </div>
+        </a>
+
+        <!-- MENÚ DESKTOP -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-700">
+          <a href="#inicio" class="hover:text-creeGreen transition-colors py-2 border-b-2 border-transparent hover:border-creeGreen">Inicio</a>
+          <a href="#institucional" class="hover:text-creeGreen transition-colors py-2 border-b-2 border-transparent hover:border-creeGreen">Institucional</a>
+          <a href="#oferta" class="hover:text-creeGreen transition-colors py-2 border-b-2 border-transparent hover:border-creeGreen">Oferta Académica</a>
+          <a href="#tramites" class="hover:text-creeGreen transition-colors py-2 border-b-2 border-transparent hover:border-creeGreen">Trámites</a>
+          <a href="#contacto" class="hover:text-creeGreen transition-colors py-2 border-b-2 border-transparent hover:border-creeGreen">Contacto</a>
+        </nav>
+
+        <!-- BOTÓN ACCIÓN -->
+        <div class="hidden md:flex items-center gap-3">
+          <button onclick="openModal('modalTramite')" class="bg-creeGreen hover:bg-creeGreen-dark text-white text-sm font-bold px-5 py-2.5 rounded-lg shadow-md transition-all transform active:scale-95 flex items-center gap-2">
+            <i class="fas fa-file-alt"></i> Portal de Trámites
+          </button>
+        </div>
+
+        <!-- BOTÓN MENÚ MÓVIL -->
+        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-gray-600 hover:text-creeGreen hover:bg-gray-100">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- MENÚ MÓVIL DESPLEGABLE -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-6 space-y-3">
+      <a href="#inicio" onclick="toggleMobileMenu()" class="block py-2 font-semibold text-gray-700 hover:text-creeGreen">Inicio</a>
+      <a href="#institucional" onclick="toggleMobileMenu()" class="block py-2 font-semibold text-gray-700 hover:text-creeGreen">Institucional</a>
+      <a href="#oferta" onclick="toggleMobileMenu()" class="block py-2 font-semibold text-gray-700 hover:text-creeGreen">Oferta Académica</a>
+      <a href="#tramites" onclick="toggleMobileMenu()" class="block py-2 font-semibold text-gray-700 hover:text-creeGreen">Trámites</a>
+      <a href="#contacto" onclick="toggleMobileMenu()" class="block py-2 font-semibold text-gray-700 hover:text-creeGreen">Contacto</a>
+      <button onclick="openModal('modalTramite'); toggleMobileMenu();" class="w-full bg-creeGreen text-white text-sm font-bold py-3 rounded-lg shadow-md mt-2">
+        Portal de Trámites
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <!-- HERO SECTION -->
+    <section id="inicio" class="relative bg-gradient-to-br from-creeGreen via-creeGreen-dark to-gray-900 text-white py-20 lg:py-28 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <span class="inline-block bg-creeRed text-white px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-sm">
+              Educación Pública de Excelencia
+            </span>
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+              Formando Líderes e Innovadores en Encarnación
+            </h1>
+            <p class="text-base sm:text-lg text-gray-200 max-w-2xl mx-auto lg:mx-0 font-normal">
+              Bienvenidos al portal oficial del Centro Regional de Educación Gral. Patricio Escobar. Compromiso con los valores, la ciencia y la formación integral de la juventud de Itapúa.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+              <a href="#oferta" class="bg-creeRed hover:bg-creeRed-dark text-white font-bold px-7 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all text-center">
+                Ver Oferta Académica
+              </a>
+              <button onclick="openModal('modalFormularios')" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 font-bold px-7 py-3.5 rounded-xl backdrop-blur-md transition-all text-center">
+                Descargar Formularios
+              </button>
+            </div>
+          </div>
+
+          <!-- TARJETA DE AVISOS Y COMUNICADOS -->
+          <div class="lg:col-span-5 bg-white text-gray-800 rounded-2xl p-6 shadow-2xl border-t-8 border-creeGreen">
+            <div class="flex items-center justify-between border-b pb-4 mb-4">
+              <h2 class="font-bold text-lg text-creeGreen flex items-center gap-2">
+                <i class="fas fa-bullhorn text-creeRed"></i> Comunicados Oficiales
+              </h2>
+              <span class="text-xs bg-creeGreen-light text-creeGreen font-bold px-2.5 py-1 rounded-md">Actualizado</span>
+            </div>
+            <div class="space-y-4">
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-100 hover:border-creeGreen/30 transition-colors cursor-pointer" onclick="openAviso('Calendario Académico 2026', 'El inicio del periodo lectivo y la entrega de documentos oficiales están habilitados para la comunidad educativa.')">
+                <span class="text-xs font-bold text-creeRed">17 AGO, 2026</span>
+                <h3 class="font-bold text-sm text-gray-800 mt-0.5">Calendario de Exámenes e Inscripciones</h3>
+                <p class="text-xs text-gray-600 mt-1">Revisa el cronograma de postulaciones y requisitos institucionales...</p>
+              </div>
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-100 hover:border-creeGreen/30 transition-colors cursor-pointer" onclick="openAviso('Mantenimiento Informático', 'Plataforma para emisión de constancias estará disponible 24/7 de forma continua.')">
+                <span class="text-xs font-bold text-creeGreen">15 AGO, 2026</span>
+                <h3 class="font-bold text-sm text-gray-800 mt-0.5">Trámites Online y Constancias</h3>
+                <p class="text-xs text-gray-600 mt-1">Ya se pueden solicitar permisos y constancias de estudio en línea...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN INSTITUCIONAL -->
+    <section id="institucional" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl font-black text-creeGreen uppercase tracking-wide">Nuestra Institución</h2>
+          <div class="w-16 h-1 bg-creeRed mx-auto my-3 rounded-full"></div>
+          <p class="text-gray-600">Trayectoria, disciplina y compromiso pedagógico al servicio del departamento de Itapúa.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition-shadow text-center group">
+            <div class="w-16 h-16 bg-creeGreen-light text-creeGreen rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6 group-hover:bg-creeGreen group-hover:text-white transition-colors">
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Misión</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Ofrecer una educación integral, crítica e inclusiva que fomente valores éticos, desarrollo científico y excelencia académica en los estudiantes.
+            </p>
+          </div>
+
+          <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition-shadow text-center group">
+            <div class="w-16 h-16 bg-creeRed-light text-creeRed rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6 group-hover:bg-creeRed group-hover:text-white transition-colors">
+              <i class="fas fa-eye"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Visión</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Consolidarnos como la institución referente en innovación educativa y formación de ciudadanos éticos comprometidos con el progreso nacional.
+            </p>
+          </div>
+
+          <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:shadow-xl transition-shadow text-center group">
+            <div class="w-16 h-16 bg-creeGreen-light text-creeGreen rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6 group-hover:bg-creeGreen group-hover:text-white transition-colors">
+              <i class="fas fa-heart font-bold"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Valores</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Patriotismo, respeto, honestidad, responsabilidad académica, espíritu de trabajo en equipo y solidaridad comunitaria.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFERTA ACADÉMICA INTERACTIVA -->
+    <section id="oferta" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <h2 class="text-3xl font-black text-creeGreen uppercase tracking-wide">Oferta Académica</h2>
+          <div class="w-16 h-1 bg-creeRed mx-auto my-3 rounded-full"></div>
+          <p class="text-gray-600">Niveles de enseñanza orientados al desarrollo integral de los alumnos.</p>
+        </div>
+
+        <!-- FILTROS -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10">
+          <button onclick="filterOferta('todos', event)" class="filter-btn active bg-creeGreen text-white font-semibold px-5 py-2 rounded-full text-sm shadow-sm transition-all">Todos</button>
+          <button onclick="filterOferta('basica', event)" class="filter-btn bg-white text-gray-700 hover:bg-gray-100 font-semibold px-5 py-2 rounded-full text-sm border transition-all">Educación Básica</button>
+          <button onclick="filterOferta('media', event)" class="filter-btn bg-white text-gray-700 hover:bg-gray-100 font-semibold px-5 py-2 rounded-full text-sm border transition-all">Educación Media</button>
+          <button onclick="filterOferta('docente', event)" class="filter-btn bg-white text-gray-700 hover:bg-gray-100 font-semibold px-5 py-2 rounded-full text-sm border transition-all">Formación Docente</button>
+        </div>
+
+        <!-- TARJETAS -->
+        <div class="grid md:grid-cols-3 gap-8" id="ofertaGrid">
+          <div class="oferta-card basica bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-gray-100">
+            <div class="bg-creeGreen p-6 text-white">
+              <i class="fas fa-child text-3xl mb-2"></i>
+              <h3 class="text-xl font-bold">Educación Escolar Básica</h3>
+              <span class="text-xs bg-white/20 px-2 py-0.5 rounded text-white font-medium">1.º, 2.º y 3.er Ciclo</span>
+            </div>
+            <div class="p-6 space-y-4">
+              <p class="text-xs text-gray-600">Desarrollo de competencias fundamentales en lectura, ciencias, matemáticas e idiomas.</p>
+              <button onclick="openModalInfo('Educación Escolar Básica', 'Enfocada en el desarrollo cognitivo, cívico y afectivo en aulas totalmente equipadas.')" class="w-full border border-creeGreen text-creeGreen font-bold py-2.5 rounded-lg text-xs hover:bg-creeGreen hover:text-white transition-colors">
+                Más Información
+              </button>
+            </div>
+          </div>
+
+          <div class="oferta-card media bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-gray-100">
+            <div class="bg-creeRed p-6 text-white">
+              <i class="fas fa-graduation-cap text-3xl mb-2"></i>
+              <h3 class="text-xl font-bold">Bachilleratos Científicos y Técnicos</h3>
+              <span class="text-xs bg-white/20 px-2 py-0.5 rounded text-white font-medium">Nivel Medio</span>
+            </div>
+            <div class="p-6 space-y-4">
+              <p class="text-xs text-gray-600">Especialidades en Ciencias Básicas, Ciencias Sociales, Administración de Negocios e Informática.</p>
+              <button onclick="openModalInfo('Bachilleratos', 'Preparación de alto nivel para el ingreso a la universidad con laboratorios equipados.')" class="w-full border border-creeRed text-creeRed font-bold py-2.5 rounded-lg text-xs hover:bg-creeRed hover:text-white transition-colors">
+                Más Información
+              </button>
+            </div>
+          </div>
+
+          <div class="oferta-card docente bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-gray-100">
+            <div class="bg-gray-800 p-6 text-white">
+              <i class="fas fa-chalkboard-teacher text-3xl mb-2"></i>
+              <h3 class="text-xl font-bold">Instituto de Formación Docente</h3>
+              <span class="text-xs bg-white/20 px-2 py-0.5 rounded text-white font-medium">Nivel Superior</span>
+            </div>
+            <div class="p-6 space-y-4">
+              <p class="text-xs text-gray-600">Especialización e instrucción para los futuros educadores de la región de Itapúa.</p>
+              <button onclick="openModalInfo('Formación Docente', 'Programas pedagógicos aprobados por el MEC para habilitación docente profesional.')" class="w-full border border-gray-800 text-gray-800 font-bold py-2.5 rounded-lg text-xs hover:bg-gray-800 hover:text-white transition-colors">
+                Más Información
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN TRÁMITES -->
+    <section id="tramites" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl font-black text-creeGreen uppercase tracking-wide">Gestión y Trámites Online</h2>
+          <div class="w-16 h-1 bg-creeRed mx-auto my-3 rounded-full"></div>
+          <p class="text-gray-600">Solicita constancias, certificados y requisitos de forma rápida.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="p-6 rounded-2xl border border-gray-200 hover:border-creeGreen transition-colors group cursor-pointer bg-gray-50" onclick="openModal('modalTramite')">
+            <i class="fas fa-certificate text-3xl text-creeGreen mb-4 group-hover:scale-110 transition-transform"></i>
+            <h3 class="font-bold text-gray-900 mb-1">Constancia de Estudio</h3>
+            <p class="text-xs text-gray-500">Solicitud en línea con código de validación institucional.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border border-gray-200 hover:border-creeGreen transition-colors group cursor-pointer bg-gray-50" onclick="openModal('modalFormularios')">
+            <i class="fas fa-file-download text-3xl text-creeRed mb-4 group-hover:scale-110 transition-transform"></i>
+            <h3 class="font-bold text-gray-900 mb-1">Formularios de Inscripción</h3>
+            <p class="text-xs text-gray-500">Descarga fichas de matriculación y compromisos académicos.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border border-gray-200 hover:border-creeGreen transition-colors group cursor-pointer bg-gray-50" onclick="openModal('modalTramite')">
+            <i class="fas fa-user-graduate text-3xl text-creeGreen mb-4 group-hover:scale-110 transition-transform"></i>
+            <h3 class="font-bold text-gray-900 mb-1">Certificado de Estudios</h3>
+            <p class="text-xs text-gray-500">Emisión para egresados de Educación Media y Superior.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border border-gray-200 hover:border-creeGreen transition-colors group cursor-pointer bg-gray-50" onclick="openModal('modalFaq')">
+            <i class="fas fa-question-circle text-3xl text-gray-700 mb-4 group-hover:scale-110 transition-transform"></i>
+            <h3 class="font-bold text-gray-900 mb-1">Preguntas Frecuentes</h3>
+            <p class="text-xs text-gray-500">Respuestas directas sobre traslados, horarios y uniformes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN CONTACTO -->
+    <section id="contacto" class="py-20 bg-gray-900 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12">
+          <!-- INFO CONTACTO -->
+          <div class="space-y-6">
+            <h2 class="text-3xl font-black text-creeGreen uppercase tracking-wide">Contacto e Informaciones</h2>
+            <p class="text-gray-400 text-sm">Visítanos o ponte en contacto con la Secretaría General de la institución.</p>
+            
+            <div class="space-y-4 text-sm">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-creeGreen/20 text-creeGreen flex items-center justify-center shrink-0">
+                  <i class="fas fa-map-marker-alt text-lg"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold">Ubicación</h4>
+                  <p class="text-gray-400">Avda. Irrazábal e/ Villarrica, Encarnación, Paraguay.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-creeRed/20 text-creeRed flex items-center justify-center shrink-0">
+                  <i class="fas fa-phone text-lg"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold">Teléfono Institucional</h4>
+                  <p class="text-gray-400">(071) 200-000 / Secretaría: Int. 102</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-creeGreen/20 text-creeGreen flex items-center justify-center shrink-0">
+                  <i class="fas fa-envelope text-lg"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold">Correo Electrónico</h4>
+                  <p class="text-gray-400">contacto@cree.edu.py</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FORMULARIO INTERACTIVO DE CONTACTO -->
+          <div class="bg-white text-gray-800 p-8 rounded-2xl shadow-xl">
+            <h3 class="text-xl font-bold text-creeGreen mb-4">Envíanos tu Mensaje</h3>
+            <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-gray-600 mb-1">Nombre Completo</label>
+                <input type="text" required class="w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-creeGreen focus:outline-none text-sm" placeholder="Tu nombre">
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-gray-600 mb-1">Correo Electrónico / Teléfono</label>
+                <input type="text" required class="w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-creeGreen focus:outline-none text-sm" placeholder="ejemplo@correo.com">
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-gray-600 mb-1">Mensaje o Consulta</label>
+                <textarea rows="4" required class="w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-creeGreen focus:outline-none text-sm" placeholder="Escribe tu consulta aquí..."></textarea>
+              </div>
+              <button type="submit" class="w-full bg-creeGreen hover:bg-creeGreen-dark text-white font-bold py-3 rounded-lg shadow-md transition-all text-sm">
+                Enviar Mensaje
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER INSTITUCIONAL -->
+  <footer class="bg-gray-950 text-gray-400 py-10 border-t border-gray-800 text-xs">
+    <div class="max-w-7xl mx-auto px-4 text-center space-y-4">
+      <div class="flex justify-center items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-creeGreen"></span>
+        <span class="w-3 h-3 rounded-full bg-white"></span>
+        <span class="w-3 h-3 rounded-full bg-creeRed"></span>
+      </div>
+      <p>&copy; 2026 C.R.E.E. Centro Regional de Educación Gral. Patricio Escobar. Todos los derechos reservados.</p>
+      <p class="text-gray-600">Portal web oficial desarrollado para la gestión educativa de Encarnación, Itapúa.</p>
+    </div>
+  </footer>
+
+  <!-- MODAL DINÁMICO DE TRÁMITES -->
+  <div id="modalTramite" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+      <button onclick="closeModal('modalTramite')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+      <h3 class="text-xl font-bold text-creeGreen mb-2"><i class="fas fa-file-signature text-creeRed"></i> Solicitud de Trámites</h3>
+      <p class="text-xs text-gray-600 mb-4">Completa el formulario para iniciar la gestión digital de tus documentos.</p>
+      <form onsubmit="handleTramiteSubmit(event)" class="space-y-3">
+        <input type="text" placeholder="C.I. del estudiante" required class="w-full px-3 py-2 border rounded-lg text-sm">
+        <input type="text" placeholder="Nombre Completo" required class="w-full px-3 py-2 border rounded-lg text-sm">
+        <select required class="w-full px-3 py-2 border rounded-lg text-sm text-gray-700">
+          <option value="">Seleccione el tipo de trámite</option>
+          <option value="constancia">Constancia de Estudio</option>
+          <option value="certificado">Certificado de Calificaciones</option>
+          <option value="visacion">Visación de Documentos</option>
+        </select>
+        <button type="submit" class="w-full bg-creeGreen text-white font-bold py-2.5 rounded-lg text-sm shadow">
+          Generar Solicitud
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL FORMULARIOS -->
+  <div id="modalFormularios" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+      <button onclick="closeModal('modalFormularios')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+      <h3 class="text-xl font-bold text-creeGreen mb-4"><i class="fas fa-download text-creeRed"></i> Descarga de Formularios</h3>
+      <div class="space-y-3">
+        <a href="#" onclick="alert('Descargando Formulario de Matriculación 2026 PDF'); return false;" class="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-creeGreen-light transition-colors border">
+          <span class="text-xs font-bold text-gray-700">Formulario de Matriculación EEB/EM</span>
+          <i class="fas fa-file-pdf text-creeRed text-lg"></i>
+        </a>
+        <a href="#" onclick="alert('Descargando Compromiso Institucional PDF'); return false;" class="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-creeGreen-light transition-colors border">
+          <span class="text-xs font-bold text-gray-700">Ficha Médica e Inscripción</span>
+          <i class="fas fa-file-pdf text-creeRed text-lg"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PREGUNTAS FRECUENTES -->
+  <div id="modalFaq" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+      <button onclick="closeModal('modalFaq')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+      <h3 class="text-xl font-bold text-creeGreen mb-4"><i class="fas fa-question-circle text-creeGreen"></i> Preguntas Frecuentes</h3>
+      <div class="space-y-3 text-xs text-gray-600">
+        <div class="border-b pb-2">
+          <strong class="text-gray-800 block mb-1">¿Cuáles son los horarios de atención de la secretaría?</strong>
+          Lunes a Viernes de 07:00 a 12:00 hs y de 13:00 a 17:00 hs.
+        </div>
+        <div class="border-b pb-2">
+          <strong class="text-gray-800 block mb-1">¿Cómo solicitar un traslado institucional?</strong>
+          Debe presentar la cédula de identidad del tutor y las notas del alumno mediante la mesa de entrada.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT DINÁMICO -->
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    function filterOferta(categoria, event) {
+      const cards = document.querySelectorAll('.oferta-card');
+      const btns = document.querySelectorAll('.filter-btn');
+
+      btns.forEach(btn => {
+        btn.classList.remove('bg-creeGreen', 'text-white');
+        btn.classList.add('bg-white', 'text-gray-700');
+      });
+
+      if(event && event.target) {
+        event.target.classList.remove('bg-white', 'text-gray-700');
+        event.target.classList.add('bg-creeGreen', 'text-white');
+      }
+
+      cards.forEach(card => {
+        if (categoria === 'todos' || card.classList.contains(categoria)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function openModalInfo(titulo, contenido) {
+      alert(titulo + '\n\n' + contenido);
+    }
+
+    function openAviso(titulo, contenido) {
+      alert('Comunicado: ' + titulo + '\n\n' + contenido);
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      alert('¡Mensaje enviado con éxito! Nos pondremos en contacto a la brevedad.');
+      e.target.reset();
+    }
+
+    function handleTramiteSubmit(e) {
+      e.preventDefault();
+      alert('Solicitud de trámite registrada exitosamente. Código de seguimiento generado.');
+      closeModal('modalTramite');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
